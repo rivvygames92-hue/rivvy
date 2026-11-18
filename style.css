@@ -1,0 +1,13 @@
+:root{--bg:#111;--card:#1c1c1c;--text:#eee;--muted:#aaa;--red:#d32;--gold:#f5b300}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,Helvetica,Arial,sans-serif}
+header{background:var(--red);border-bottom:6px solid var(--gold);padding:18px 16px;text-align:center}
+header a{color:#fff;text-decoration:none;font-weight:800;font-size:28px;letter-spacing:3px}
+main{max-width:760px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:26px;margin:0 0 4px}
+h2{font-size:19px;margin:28px 0 6px;color:var(--gold)}
+.muted{color:var(--muted);font-size:14px}
+a{color:var(--gold)}
+ul{padding-left:22px}
+.card{background:var(--card);border-radius:10px;padding:16px;margin:16px 0}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px;border-top:1px solid #333}
