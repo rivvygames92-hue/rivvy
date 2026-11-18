@@ -1,11 +1,81 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Rivvy: Robot Runner</title><link rel="stylesheet" href="style.css"></head><body>
+<title>Rivvy: Robot Runner</title>
+<meta name="description" content="Rivvy: Robot Runner - flip, dash and slice through a haywire factory in this pixel endless runner for iPhone.">
+<link rel="icon" href="icon.png"><link rel="stylesheet" href="style.css"></head><body>
 <header><a href="index.html">RIVVY</a></header>
-<main style="text-align:center">
-<img src="icon.png" alt="Rivvy app icon" width="140" height="140" style="border-radius:28px;image-rendering:pixelated;margin-top:12px">
-<h1>Rivvy: Robot Runner</h1>
-<p>Flip, dash and slice through a haywire factory in this pixel endless runner.</p>
-<p><a href="support.html">Support</a> &middot; <a href="privacy.html">Privacy Policy</a></p>
+<main>
+<section class="hero">
+  <div class="pics"><img class="icon" src="icon.png" alt="Rivvy app icon"><img class="bot" src="img/rivvy.png" alt="Rivvy the robot" onerror="this.remove()"></div>
+  <h1>Rivvy: Robot Runner</h1>
+  <div class="tag">ON THE RUN</div>
+  <p>The factory has gone haywire - and only one tiny robot can run through it. Flip between the floor and the ceiling,
+  dash-slice the robot crew, and take down giant bosses in this pixel-art endless runner.</p>
+  <span class="store soon">Coming soon to the App Store</span>
+</section>
+<nav class="jump"><a href="#play">How to play</a><a href="#fights">Boss fights</a><a href="#bosses">Bosses</a><a href="#crew">The crew</a><a href="support.html">Support</a></nav>
+
+<h2 id="play">How to play</h2>
+<div class="feats">
+  <div class="card"><b>Tap</b> to flip between the floor and the ceiling.</div>
+  <div class="card"><b>Swipe up or down</b> to switch rails.</div>
+  <div class="card"><b>Swipe forward</b> to dash-slice enemies ahead.</div>
+  <div class="card"><b>Swipe back</b> to slice the ones chasing you.</div>
+</div>
+
+<h2 id="fights">Boss fights</h2>
+<p>Beat each boss in its own fight to win its costume and a new power for your runs.</p>
+<div class="fights" id="fightList"></div>
+
+<h2 id="bosses">Bosses</h2>
+<p>Giant machines that crash into your run. Each has a weak spot - learn it and cut it down.</p>
+<div class="grid" id="bossList"></div>
+
+<h2 id="crew">The factory crew</h2>
+<p>Every robot in the factory has its own trick. Meet them all to fill your logbook.</p>
+<div class="grid" id="crewList"></div>
 </main>
-<footer>&copy; 2026 Rivvy: Robot Runner</footer>
+<footer>&copy; 2026 Rivvy: Robot Runner &middot; <a href="support.html">Support</a> &middot; <a href="privacy.html">Privacy Policy</a></footer>
+<script>
+// Names and tips come from the game (TunnelBoss.Titles/Tips, FactoryCrew.Name/Tip); pictures from Unity's "Export Website Art".
+const cap = s => s.toLowerCase().replace(/(^|[\s-])\S/g, m => m.toUpperCase()).replace(/\bIt\b/g,"it");
+const tip = s => s.charAt(0) + s.slice(1).toLowerCase();
+const slug = s => s.toLowerCase().replace("the ","").replace(/ /g,"_").replace(/-/g,"_");
+function tile(img, name, text){
+  return `<div class="tile"><div class="art"><img src="${img}" alt="${name}" loading="lazy" onerror="this.style.visibility='hidden'"></div>
+    <div class="name">${name}</div>${text ? `<div class="tip">${text}</div>` : ""}</div>`;
+}
+const fights = [
+  ["PIPE KRAKEN","kraken","Kraken","Steam Blast","Blast chasers away with steam.","CUT THE GOLD VALVE WHEN IT STICKS!"],
+  ["BELT GATOR","gator","Gator","Gator Dash","Tear through enemies with a mighty dash.","CUT THE GOLD BUCKLE OR TAIL TIP!"],
+  ["THE CHAMELEON","chameleon","Chameleon","Roll","Roll through danger in a ball.","CUT IT WHEN IT UNCOILS!"],
+];
+document.getElementById("fightList").innerHTML = fights.map(([t,c,cn,ab,abt,hint]) =>
+  `<div class="fight"><div class="pair"><img src="img/boss_${slug(t)}.png" alt="${cap(t)}" onerror="this.style.visibility='hidden'">
+   <img class="bot" src="img/costume_${c}.png" alt="Rivvy in the ${cn} costume" onerror="this.style.visibility='hidden'"></div>
+   <h3>${cap(t)}</h3><div class="row">Wins: <b>${cn} costume</b></div><div class="row">Power: <b>${ab}</b> - ${abt}</div>
+   <div class="row">Tip: ${tip(hint)}</div></div>`).join("");
+const bosses = [
+  ["BOILER BOT","CUT THE VENTS WHEN THEY GLOW!"],["SCRAP WORM","CUT THE BLUE TAIL WHEN IT IS LIT!"],
+  ["BLIMP BOMBER","CUT THE BASKET UNDER IT!"],["GRAVITY GOLEM","CUT ITS CORE WHEN DIZZY!"],["TESLA TWINS","CUT THE GLOWING COIL!"],
+  ["BURROWER","CUT THE JAMMED DRILL!"],["MIRROR MECH","CUT IT RIGHT AFTER IT THROWS!"],["MAGNET TITAN","BREAK THE RING - DASH THROUGH ITS CORE!"],
+  ["CRUCIBLE","DODGE THE POUR - CUT THE GLOWING CHAIN!"],["SPIDER CRANE","CUT THE PLANTED LEG!"],
+  ["WRECKING BALL","BALL STUCK - DASH THE GOLD HOOK!"],["RAIL REAPER","CUT IT WHEN THE SCYTHE IS AWAY!"],["GEAR GOLIATH","CUT THE GOLD TOOTH!"],
+  ["TWIN PRESSES","CUT A PRESS RIGHT AFTER IT RAMS!"],["RAIL TRAIN","CUT THE GOLD DOOR WHEN IT STOPS!"],
+];
+document.getElementById("bossList").innerHTML = bosses.map(([t,h]) => tile(`img/boss_${slug(t)}.png`, cap(t), tip(h))).join("");
+const crew = [
+  ["rat","Conveyor Rat",""],["frog","Leapfrog",""],["teeth","Chatter Teeth","IF IT BITES: FLIP TO SHAKE IT"],
+  ["riveter","Rivet Skull","FLIP TO ITS RAIL + DASH BACK"],["vacuum","Vacuum Bot","CUT IT WHILE IT SMOKES"],
+  ["welder","Welder Skull","FLIP AWAY - CUT WHEN COOL"],["slug","Ooze Slug","2 CUTS - AVOID THE SLIME"],
+  ["jack","Jack-in-the-Box","CUT IT BEFORE IT POPS"],["magnet","Magnet Bot","CUT IT BEFORE IT PULLS"],
+  ["crusher","Crusher","CUT IT WHEN IT SLAMS"],["claw","Crane Claw","CUT IT WHEN IT COMES DOWN"],
+  ["foreman","Skull Foreman","CUT HIM WHEN HE COMES CLOSE"],["wire","Live Wire","PASS IT ON THE OTHER RAIL"],
+  ["nut","Twin Bolts","CUT ONE - THE OTHER CHASES!"],["pitcher","Pitching Bot","CUT THE DRILL TO RETURN IT"],
+  ["blob","Battery Blob","IT SPLITS WHEN CUT!"],["boing","Boing Ball",""],["crab","Cone Crab","LET IT PASS - CUT FROM BEHIND"],
+  ["squid","Ink Squid","CUT THE SQUID - DODGE THE INK"],["copycat","Copycat","FLIP TO ITS RAIL + DASH"],
+  ["saw","Buzz Saw","UNCUTTABLE - DODGE IT"],["drone","Drone Trio","ONE DASH THROUGH ALL 3"],["fork","Fork Truck","CUT WHEN THE FORKS LIFT"],
+  ["mouser","The Mouser","IT POUNCES TWICE - 2 CUTS"],["hen","Mother Hen","DASH A GOLD EGG BACK AT HER"],
+];
+document.getElementById("crewList").innerHTML = crew.map(([k,n,h]) => tile(`img/crew_${k}.png`, n, h ? tip(h) : "Just dash into it!")).join("");
+</script>
 </body></html>
