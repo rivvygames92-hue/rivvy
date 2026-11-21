@@ -39,3 +39,23 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px;bor
 .fight .row{font-size:14px;color:var(--muted)}
 .fight .row b{color:var(--text)}
 nav.jump{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;margin:4px 0 8px;font-size:15px}
+
+/* ---- Escape the Factory (stages, 2026-11-21) ---- */
+.soon-tag{display:inline-block;background:#333;color:#ccc;font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;margin-left:8px;vertical-align:middle;letter-spacing:.5px}
+.zones{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:8px 0}
+.zone{background:var(--card);border-radius:12px;padding:12px;border-top:4px solid #58d854}
+.zone.z2{border-top-color:#f87a1a}
+.zone.z3{border-top-color:#78a0d2}
+.zone > img{width:100%;border-radius:6px;image-rendering:pixelated;display:block}
+.zone h3{margin:10px 0 2px;font-size:17px}
+.zone .row{font-size:14px;color:var(--muted)}
+.zone .row b{color:var(--text)}
+.zone .boss{display:flex;gap:10px;align-items:center;margin:8px 0;font-size:14px;color:var(--muted);line-height:1.4}
+.zone .boss b{color:var(--text)}
+.zone .boss img{width:64px;height:64px;object-fit:contain;image-rendering:pixelated;flex:none}
+.zone img.cos{height:28px;vertical-align:middle;image-rendering:pixelated;margin-left:4px}
+.escape{display:flex;gap:14px;align-items:center;background:var(--card);border-radius:12px;padding:12px;margin:12px 0;border-top:4px solid var(--gold)}
+.escape img{width:44%;max-width:260px;border-radius:6px;image-rendering:pixelated;flex:none}
+.escape h3{margin:0 0 4px;font-size:17px;color:var(--gold)}
+.escape div{font-size:14px;color:var(--muted);line-height:1.5}
+@media (max-width:480px){.escape{flex-direction:column}.escape img{width:100%;max-width:none}}
